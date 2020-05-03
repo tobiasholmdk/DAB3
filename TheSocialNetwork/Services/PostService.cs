@@ -25,11 +25,30 @@ namespace TheSocialNetwork.Services
             return _posts.Find(p => p.Id == id).FirstOrDefault();
         }
 
-        public Post GetbyUser(User user)
+        public List<Post> GetPostByUser(User user)
         {
-            return _posts.Find(p => p.Author == user.Id).ToList();
+            return _posts.Find(p => p.Author == user.Name).ToList();
         }
 
+        public List<Post> GetPostsFromCircle(Circle circle)
+        {
+            return _posts.Find(p => p.Circles.Contains(circle)).ToList();
+        }
+
+        public void Create(Post post)
+        {
+            _posts.InsertOne(post);
+        }
+
+        public void Remove(Post post)
+        {
+            _posts.DeleteOne(p => p.Id == post.Id);
+        }
+
+        public void RemoveAll()
+        {
+            _posts.DeleteMany(p => p.Id != null);
+        }
 
     }
 }
