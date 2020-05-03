@@ -11,7 +11,7 @@ namespace TheSocialNetwork.Services
         public UserService()
         {
             var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("TheSocialNetwork");
+            var database = client.GetDatabase("TheSocialNetworkDatabase");
 
             _users = database.GetCollection<User>("Users");
         }
