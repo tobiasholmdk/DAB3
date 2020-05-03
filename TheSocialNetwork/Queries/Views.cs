@@ -34,9 +34,34 @@ namespace TheSocialNetwork.Queries
             }
         }
 
-        public void UserFeedPost(User user)
+        public void UserFeed(User user)
         {
+            //var _followedPosts = _postService.GetByFollowedUsers(user);
+            var _ownposts = _postService.GetByAuthor(user);
+            var _userCircles = _userService.GetCirclesByUser(user);
+
+            Console.WriteLine("Your posts");
+            foreach (var x in _ownposts)
+            {
+                Console.WriteLine( "Post " + x.Content + " Time Posted: " + x.Published);
+            }
+
+            Console.WriteLine("-----------------------------------------------------------");
+
+            foreach (var x in _userCircles)
+            {
+                Console.WriteLine("Circle Name: " + x.CircleName);
+                var circlepost = _postService.GetPostsFromCircle(x);
+                foreach (var y in circlepost)
+                {
+                    Console.WriteLine("User " + y.Author + " Posted " + y.Content + " Time Posted: " + y.Published);
+                }
+            }
             
+            Console.WriteLine("-----------------------------------------------------------");
+
+            ShowFollowedUserPost(user);
+
         }
     }
 }

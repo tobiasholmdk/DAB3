@@ -8,6 +8,7 @@ namespace TheSocialNetwork.Services
     class PostService
     {
         private readonly IMongoCollection<Post> _posts;
+        private readonly UserService _userService;
 
         public PostService()
         {
@@ -20,9 +21,9 @@ namespace TheSocialNetwork.Services
         public List<Post> Get() =>
             _posts.Find(p => true).ToList();
 
-        public Post GetById(string id)
+        public List<Post> GetByAuthor(User user)
         {
-            return _posts.Find(p => p.Author == id).FirstOrDefault();
+            return _posts.Find(p => p.Author == user.Name).ToList();
         }
 
         public List<Post> GetPostByUser(User user)
@@ -33,6 +34,17 @@ namespace TheSocialNetwork.Services
         public List<Post> GetPostsFromCircle(Circle circle)
         {
             return _posts.Find(p => p.Circles.Contains(circle)).ToList();
+        }
+
+        public List<Post> GetPostsFromAllCircles(List<Circle> circles)
+        {
+            //var circles = _userService.GetCirclesByUser(user);
+            List<Post> posts = new List<Post>();
+            foreach (var x in circles)
+            {
+                posts.AddRange(GetPostsFromCircle(x));
+            }
+            return posts;
         }
 
         public List<Post> GetByFollowedUsers(User user)
