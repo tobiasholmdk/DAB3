@@ -49,6 +49,5 @@ namespace TheSocialNetwork.Services
         {
             _posts.DeleteMany(p => p.Author != null);
         }
-
     }
 }

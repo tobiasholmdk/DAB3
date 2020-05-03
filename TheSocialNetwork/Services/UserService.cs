@@ -18,17 +18,17 @@ namespace TheSocialNetwork.Services
 
         public List<User> Get()
         {
-            return _users.Find(user => true).ToList();
+            return _users.Find(u => true).ToList();
         }
 
         public User Get(string name)
         {
-            return _users.Find(user => user.Name == name).FirstOrDefault();
+            return _users.Find(u => u.Name == name).FirstOrDefault();
         }
 
         public User GetUserByName(string name)
         {
-            return _users.Find(user => user.Name == name).FirstOrDefault();
+            return _users.Find(u => u.Name == name).FirstOrDefault();
         }
 
         public Circle GetCircleByCircleName(User user, string name)
