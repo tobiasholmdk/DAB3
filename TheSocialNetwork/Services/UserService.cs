@@ -28,8 +28,7 @@ namespace TheSocialNetwork.Services
 
         public User GetUserByName(string name)
         {
-            var listUsers = _users.Find(x => x.Name == name).ToList();
-            return listUsers[0]; 
+            return _users.Find(user => user.Name == name).FirstOrDefault();
         }
 
         public Circle GetCircleByCircleName(User user, string name)
@@ -53,10 +52,9 @@ namespace TheSocialNetwork.Services
             return circleList;
         }
 
-        public User Create(User user)
+        public void Create(User user)
         {
             _users.InsertOne(user);
-            return user;
         }
 
         public void Update(int id, User userIn)
