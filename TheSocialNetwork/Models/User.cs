@@ -17,6 +17,8 @@ namespace TheSocialNetwork.Models
         public List<Circle> Circles { get; set; }
         [BsonElement("User Age")]
         public int Age { get; set; }
+        [BsonElement("Followed Users")]
+        public List<User> FollowedUsers { get; set; }
         [BsonElement("Users blocked users")]
         public List<string> BlockedUsers { get; set; }
     }

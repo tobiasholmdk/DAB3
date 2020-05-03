@@ -35,6 +35,16 @@ namespace TheSocialNetwork.Services
             return _posts.Find(p => p.Circles.Contains(circle)).ToList();
         }
 
+        public List<Post> GetByFollowedUsers(User user)
+        {
+            List<Post> posts = new List<Post>();
+            foreach (var x in user.FollowedUsers)
+            {
+                posts = _posts.Find(p => p.Author == x.Name).ToList();
+            }
+            return posts;
+        }
+        
         public void Create(Post post)
         {
             _posts.InsertOne(post);

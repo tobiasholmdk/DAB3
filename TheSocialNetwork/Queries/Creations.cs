@@ -57,11 +57,11 @@ namespace TheSocialNetwork.Queries
             _postService.Create(post);
         }
 
-        public void CreateCircle(User users, string Name)
+        public void CreateCircle(User users, string name)
         {
             var newCircle = new Circle
             {
-                CircleName = Name,
+                CircleName = name,
                 MemberNames = new List<string>()
             };
             
