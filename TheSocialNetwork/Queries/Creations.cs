@@ -48,7 +48,7 @@ namespace TheSocialNetwork.Queries
         {
             var newComment = new Comment
             {
-                Author = author.Name,
+                Author = author,
                 Content = comment,
                 Created = DateTime.Now
             };
