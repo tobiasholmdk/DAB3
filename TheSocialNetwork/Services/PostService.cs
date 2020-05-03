@@ -20,9 +20,9 @@ namespace TheSocialNetwork.Services
         public List<Post> Get() =>
             _posts.Find(p => true).ToList();
 
-        public Post GetById(int id)
+        public Post GetById(string id)
         {
-            return _posts.Find(p => p.Id == id).FirstOrDefault();
+            return _posts.Find(p => p.Author == id).FirstOrDefault();
         }
 
         public List<Post> GetPostByUser(User user)
@@ -42,12 +42,12 @@ namespace TheSocialNetwork.Services
 
         public void Remove(Post post)
         {
-            _posts.DeleteOne(p => p.Id == post.Id);
+            _posts.DeleteOne(p => p.Author == post.Author);
         }
 
         public void RemoveAll()
         {
-            _posts.DeleteMany(p => p.Id != null);
+            _posts.DeleteMany(p => p.Author != null);
         }
 
     }

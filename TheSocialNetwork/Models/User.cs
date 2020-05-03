@@ -8,10 +8,9 @@ namespace TheSocialNetwork.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public int Id { get; set; }
-        
         [BsonElement("User Name")]
         public string Name { get; set; }
+
         [BsonElement("User Gender")]
         public string Gender { get; set; }
         [BsonElement("User Circles")]

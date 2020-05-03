@@ -21,9 +21,9 @@ namespace TheSocialNetwork.Services
             return _users.Find(user => true).ToList();
         }
 
-        public User Get(int id)
+        public User Get(string name)
         {
-            return _users.Find(user => user.Id == id).FirstOrDefault();
+            return _users.Find(user => user.Name == name).FirstOrDefault();
         }
 
         public User GetUserByName(string name)
@@ -42,7 +42,7 @@ namespace TheSocialNetwork.Services
             var circleList = new List<Circle>();
             foreach (var u in users)
             {
-                var hasUser = u.Circles.Find(x => x.MemberId.Contains(user.Id));
+                var hasUser = u.Circles.Find(x => x.MemberNames.Contains(user.Name));
                 if (hasUser != null)
                 {
                     circleList.Add(hasUser);
@@ -57,19 +57,19 @@ namespace TheSocialNetwork.Services
             _users.InsertOne(user);
         }
 
-        public void Update(int id, User userIn)
+        public void Update(string name, User user)
         {
-            _users.ReplaceOne(user => user.Id == id, userIn);
+            _users.ReplaceOne(u => u.Name == name, user);
         }
 
-        public void RemoveUser(User userIn)
+        public void RemoveUser(User user)
         {
-            _users.DeleteOne(user => user.Id == userIn.Id);
+            _users.DeleteOne(u => u.Name == user.Name);
         }
 
         public void RemoveAll()
         {
-            _users.DeleteMany(user => user.Id != null);
+            _users.DeleteMany(u => u.Name != null);
         }
     }
 }
