@@ -71,5 +71,19 @@ namespace TheSocialNetwork.Services
         {
             _users.DeleteMany(u => u.Name != null);
         }
+
+        public bool checkIfBlocked(User user_id, User user_guest)
+        {
+            bool IsBlocked = false;
+            foreach(var x in user_id.BlockedUsers)
+            {
+                if(user_guest.Name == x)
+                {
+                    IsBlocked = true;
+                }                
+            }
+            return IsBlocked;
+
+        }
     }
 }
