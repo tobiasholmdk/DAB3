@@ -63,5 +63,16 @@ namespace TheSocialNetwork.Queries
             ShowFollowedUserPost(user);
 
         }
+
+        public void showAllUsers()
+        {
+            List<User> allUsers = _userService.Get();
+
+            foreach(var u in allUsers)
+            {
+                Console.WriteLine("UserName: " + u.Name);
+            }
+
+        }
     }
 }

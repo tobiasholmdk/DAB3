@@ -13,22 +13,150 @@ namespace TheSocialNetwork.Data
     {
         private readonly UserService _userService;
         private readonly PostService _postService;
-        private readonly Creations _creations;
-
-
+        private List<User> _users;
+        private List<Post> _posts;
 
         private List<Circle> _circles;
         private List<Comment> _comments;
-        private List<Post> _posts;
-        private List<User> _users;
+
 
         public DummyData()
         {
             _userService = new UserService();
             _postService = new PostService();
-            Users();
-            Circles();
         }
+
+        public void SeedData()
+        {
+            _postService.RemoveAll();
+            _userService.RemoveAll();
+
+            Users();
+
+            //Posts();
+            //Circles();
+            //Comments();
+            UsersFollowerAndBlocked();
+        }
+
+        public void Users()
+        {
+            _users = new List<User>
+            {
+                new User
+                {
+                    Name = "Morten",
+                    Age = 25,
+                    Gender = "Male",
+                    Circles = new List<Circle>(),
+                    BlockedUsers = new List<User>(),
+                    FollowedUsers = new List<User>()
+
+                },
+                new User
+                {
+                    Name = "Tobias",
+                    Age = 25,
+                    Gender = "Other",
+                    Circles = new List<Circle>(),
+                    BlockedUsers = new List<User>(),
+                    FollowedUsers = new List<User>()
+                    //BlockedUsers = new List<User>
+                    //{
+                    //    _users[3]
+                    //},
+                    //FollowedUsers = new List<User>
+                    //{
+                    //    _users[0],
+                    //    _users[2]
+                    //}
+                },
+                new User
+                {
+                    Name = "Frederik",
+                    Age = 23,
+                    Gender = "Male",
+                    Circles = new List<Circle>(),
+                    BlockedUsers = new List<User>(),
+                    FollowedUsers = new List<User>()
+
+                    //FollowedUsers = new List<User>
+                    //{
+                    //    _users[0],
+                    //    _users[1],
+                    //    _users[3]
+                    //}
+                },
+                new User
+                {
+                    Name = "Klara",
+                    Age = 30,
+                    Gender = "Female",
+                    Circles = new List<Circle>(),
+                    BlockedUsers = new List<User>(),
+                    FollowedUsers = new List<User>()
+                    
+                    //BlockedUsers = new List<User>
+                    //{
+                    //    _users[0],
+                    //    _users[1]
+                    //},
+                    //FollowedUsers = new List<User>
+                    //{
+                    //    _users[2]
+                    //}
+                }
+            };
+            foreach (var x in _users)
+            {
+                _userService.Create(x);
+            }
+
+        }
+
+        public void UsersFollowerAndBlocked()
+        {
+            //Tobias:
+            var tempTobias = _userService.GetUserByName("Tobias");
+            tempTobias.FollowedUsers = new List<User>
+            {
+                _users[0],
+                _users[2]
+                
+            };
+            tempTobias.BlockedUsers = new List<User>
+            {
+                _users[3]
+            };
+            _userService.Update("Tobias", tempTobias);
+
+            //Frederik:
+            var tempFrederik = _userService.GetUserByName("Frederik");
+            tempFrederik.FollowedUsers = new List<User>
+            {
+                _users[0],
+                _users[1],
+                _users[3]
+            };
+            _userService.Update("Frederik", tempFrederik);
+
+            //Klara
+            var tempKlara = _userService.GetUserByName("Klara");
+            tempKlara.FollowedUsers = new List<User>
+            {
+                _users[2]
+            };
+            tempKlara.BlockedUsers = new List<User>
+            {
+                _users[0],
+                _users[1]
+            };
+            _userService.Update("Klara", tempKlara);
+
+        }
+
+
+
 
         public void Circles()
         {
@@ -185,75 +313,6 @@ namespace TheSocialNetwork.Data
             }
         }
 
-        public void Users()
-        {
-            _users = new List<User>
-            {
-                new User
-                {
-                    Name = "Morten",
-                    Age = 25,
-                    Gender = "Male",
-                    Circles = new List<Circle>(),
-                    BlockedUsers = new List<User>(),
-                    FollowedUsers = new List<User>()    
-
-                },
-                new User
-                {
-                    Name = "Tobias",
-                    Age = 25,
-                    Gender = "Other",
-                    Circles = new List<Circle>(),
-                    BlockedUsers = new List<User>
-                    {
-                        _users[3]
-                    },
-                    FollowedUsers = new List<User>
-                    {
-                        _users[0],
-                        _users[2]
-                    }
-                },
-                new User
-                {
-                    Name = "Frederik",
-                    Age = 23,
-                    Gender = "Male",
-                    Circles = new List<Circle>(),
-                    BlockedUsers = new List<User>(),
- 
-                    FollowedUsers = new List<User>
-                    {                                          
-                        _users[0],
-                        _users[1],
-                        _users[3]                    
-                    }
-                },
-                new User
-                {
-                    Name = "Klara",
-                    Age = 30,
-                    Gender = "Female",
-                    Circles = new List<Circle>(),
-                    BlockedUsers = new List<User>
-                    {
-                        _users[0],
-                        _users[1]
-                    },
-                    FollowedUsers = new List<User>
-                    {
-                        _users[2]
-                    }
-
-
-                },
-            };
-            foreach (var x in _users)
-            {
-                _userService.Create(x);
-            }
-
-        }
+       
     }
 }

@@ -8,6 +8,8 @@ namespace TheSocialNetwork.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        public ObjectId Id { get; set; }
+
         [BsonElement("User Name")]
         public string Name { get; set; }
 

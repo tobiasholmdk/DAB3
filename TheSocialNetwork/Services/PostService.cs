@@ -8,7 +8,6 @@ namespace TheSocialNetwork.Services
     class PostService
     {
         private readonly IMongoCollection<Post> _posts;
-        private readonly UserService _userService;
 
         public PostService()
         {
@@ -23,7 +22,7 @@ namespace TheSocialNetwork.Services
         
         public Post Get(Post post) 
         {
-        return _posts.Find(p => p == post).FirstOrDefault();
+            return _posts.Find(p => p == post).FirstOrDefault();
         }
         public List<Post> GetByAuthor(User user)
         {
