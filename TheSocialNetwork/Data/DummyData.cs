@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MongoDB.Driver;
 using TheSocialNetwork.Queries;
 using TheSocialNetwork.Models;
 using TheSocialNetwork.Queries;
@@ -15,6 +16,7 @@ namespace TheSocialNetwork.Data
         private readonly Creations _creations;
 
 
+
         private List<Circle> _circles;
         private List<Comment> _comments;
         private List<Post> _posts;
@@ -24,7 +26,6 @@ namespace TheSocialNetwork.Data
         {
             _userService = new UserService();
             _postService = new PostService();
-                                          
             Users();
             Circles();
         }
@@ -60,7 +61,21 @@ namespace TheSocialNetwork.Data
                     Members = new List<User>()
                 }
             };
-
+            // User 0
+            var user = _userService.Get(_users[0]);
+            user.Circles.Add(_circles[0]);
+            user.Circles.Add(_circles[1]);
+            // User 1
+            user = _userService.Get(_users[1]);
+            user.Circles.Add(_circles[0]);
+            user.Circles.Add(_circles[1]);
+            // User 2
+            user = _userService.Get(_users[2]);
+            user.Circles.Add(_circles[0]);
+            user.Circles.Add(_circles[1]);
+            // User 3
+            user = _userService.Get(_users[3]);
+            user.Circles.Add(_circles[0]);
         }
         public void Comments()
         {
@@ -79,6 +94,13 @@ namespace TheSocialNetwork.Data
                     Author = _users[1]
                 }
             };
+            
+            // Post 2
+            var post = _postService.Get(_posts[2]);
+            post.Comments.Add(_comments[0]);
+            // Post 3
+            post = _postService.Get(_posts[3]);
+            post.Comments.Add(_comments[1]);
 
         }
         public void Posts()

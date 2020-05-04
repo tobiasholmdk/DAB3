@@ -20,7 +20,11 @@ namespace TheSocialNetwork.Services
 
         public List<Post> Get() =>
             _posts.Find(p => true).ToList();
-
+        
+        public Post Get(Post post) 
+        {
+        return _posts.Find(p => p == post).FirstOrDefault();
+        }
         public List<Post> GetByAuthor(User user)
         {
             return _posts.Find(p => p.Author == user).ToList();

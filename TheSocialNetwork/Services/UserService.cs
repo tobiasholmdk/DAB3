@@ -7,13 +7,15 @@ namespace TheSocialNetwork.Services
     public class UserService
     {
         private readonly IMongoCollection<User> _users;
+       // private readonly IMongoCollection<Circle> _circles;
 
         public UserService()
         {
             var client = new MongoClient("mongodb://localhost:27017");
             var database = client.GetDatabase("TheSocialNetworkDatabase");
-
+            
             _users = database.GetCollection<User>("Users");
+           // _circles = database.GetCollection<User>("Users");
         }
 
         public List<User> Get()
@@ -21,9 +23,9 @@ namespace TheSocialNetwork.Services
             return _users.Find(u => true).ToList();
         }
 
-        public User Get(string name)
+        public User Get(User user)
         {
-            return _users.Find(u => u.Name == name).FirstOrDefault();
+            return _users.Find(u => u == user).FirstOrDefault();
         }
 
         public User GetUserByName(string name)
