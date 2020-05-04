@@ -15,9 +15,7 @@ namespace TheSocialNetwork
             myDummyData.SeedData();
 
             //FeedView feedView = new FeedView();
-            //feedView.showAllUsers();
-
-            
+            //feedView.showAllUsers();      
 
 
         }
