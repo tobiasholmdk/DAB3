@@ -33,9 +33,10 @@ namespace TheSocialNetwork.Data
 
             Users();
             UsersFollowerAndBlocked();
+            Circles();
 
-            //Posts();
-            //Circles();
+            Posts();
+
             //Comments();
 
         }
@@ -52,7 +53,6 @@ namespace TheSocialNetwork.Data
                     Circles = new List<Circle>(),
                     BlockedUsers = new List<User>(),
                     FollowedUsers = new List<User>()
-
                 },
                 new User
                 {
@@ -86,18 +86,24 @@ namespace TheSocialNetwork.Data
             {
                 _userService.Create(x);
             }
-
         }
 
         public void UsersFollowerAndBlocked()
         {
+            //Morten:
+            var tempMorten = _userService.GetUserByName("Morten");
+            tempMorten.FollowedUsers = new List<User>
+            {
+                _userService.GetUserByName("Tobias")
+            };
+            _userService.Update("Morten", tempMorten);
+
             //Tobias:
             var tempTobias = _userService.GetUserByName("Tobias");
             tempTobias.FollowedUsers = new List<User>
             {
                 _users[0],
-                _users[2]
-                
+                _users[2]                
             };
             tempTobias.BlockedUsers = new List<User>
             {
@@ -129,9 +135,6 @@ namespace TheSocialNetwork.Data
             _userService.Update("Klara", tempKlara);
         }
 
-
-
-
         public void Circles()
         {
             _circles = new List<Circle>
@@ -139,46 +142,144 @@ namespace TheSocialNetwork.Data
                 new Circle
                 {
                     CircleName = "Vi elsker høns",
-                    Members = new List<User>
-                    {
-                        _users[0],
-                        _users[1],
-                        _users[2],
-                        _users[3]
-                    }
+                    Members = new List<User>()
                 },
                 new Circle
                 {
-                    CircleName = "Dabbedab",
-                    Members = new List<User>
-                    {
-                        _users[0],
-                        _users[1],
-                        _users[2]
-                    }
+                    CircleName = "Os på 4. semester",
+                    Members = new List<User>()
                 },
                 new Circle
                 {
-                    CircleName = "Pepsi Entusiater",
+                    CircleName = "Meme Entusiater",
                     Members = new List<User>()
                 }
+
             };
-            // User 0
-            var user = _userService.Get(_users[0]);
-            user.Circles.Add(_circles[0]);
-            user.Circles.Add(_circles[1]);
-            // User 1
-            user = _userService.Get(_users[1]);
-            user.Circles.Add(_circles[0]);
-            user.Circles.Add(_circles[1]);
-            // User 2
-            user = _userService.Get(_users[2]);
-            user.Circles.Add(_circles[0]);
-            user.Circles.Add(_circles[1]);
-            // User 3
-            user = _userService.Get(_users[3]);
-            user.Circles.Add(_circles[0]);
+            
+            var tempUser = _userService.GetUserByName("Morten");
+            tempUser.Circles.Add(_circles[0]);
+            tempUser.Circles.Add(_circles[1]);
+            _userService.Update("Morten", tempUser);
+
+            tempUser =_userService.GetUserByName("Tobias");
+            tempUser.Circles.Add(_circles[0]);
+            tempUser.Circles.Add(_circles[1]);
+            _userService.Update("Tobias", tempUser);
+
+            tempUser = _userService.GetUserByName("Frederik");
+            tempUser.Circles.Add(_circles[0]);
+            tempUser.Circles.Add(_circles[1]);
+            tempUser.Circles.Add(_circles[2]);
+            _userService.Update("Frederik", tempUser);
+
+            tempUser = _userService.GetUserByName("Klara");
+            tempUser.Circles.Add(_circles[0]);
+            _userService.Update("Klara", tempUser);
         }
+
+        public void Posts()
+        {
+            _posts = new List<Post>
+            {
+                new Post
+                {
+                    Author = new User(),
+                    Content = "Fuck hvor fedt at få 10 i Matematik C :D!!!!!!",
+                    PublicPost = true,
+                    Published = DateTime.Now
+                }
+            };
+
+            foreach (var x in _posts)
+            {
+                _postService.Create(x);
+            }
+
+            
+
+
+            //_posts = new List<Post>
+            //{
+            //    //Public posts: 
+            //    new Post
+            //    {
+            //        Author = _users[1],
+            //        Content = "Fuck hvor fedt at få 12 i Engelsk A niveau :D!!!!!!",
+            //        PublicPost = true,
+            //        Published = DateTime.Now
+            //    },
+
+            //    //Clicle posts:
+            //    new Post
+            //    {
+            //        Author = _users[3],
+            //        Content = "Hvordan steger man et kyliingebryst bedst?",
+            //        PublicPost = false,
+            //        Published = DateTime.Now,
+            //        Circles = new List<Circle> {_circles[0] },
+            //        Comments = new List<Comment>
+            //        {
+            //            new Comment
+            //            {
+            //                Content = "Ej det kan du ikke skrive her",
+            //                Author = _users[0],
+            //                Created = DateTime.Now
+            //            },
+            //            new Comment
+            //            {
+            //                Content = "7 min på hver side på stegepanden",
+            //                Author = _users[2],
+            //                Created = DateTime.Now
+            //            },
+            //            new Comment
+            //            {
+            //                Content = "Ikk spis kylling! #VeganLife!",
+            //                Author = _users[1],
+            //                Created = DateTime.Now
+            //            },
+            //        }
+            //    },
+
+            //    //Clicle posts:
+            //    new Post
+            //    {
+            //        Content = "Syntes i også at semester 4 er svært?",
+            //        Author = _users[0],
+            //        PublicPost = false,
+            //        Published = DateTime.Now,
+            //        Circles = new List<Circle>
+            //        {
+            //            _circles[1]
+            //        },
+            //        Comments = new List<Comment>
+            //        {
+            //            _comments[0]
+            //        }
+
+            //    },
+            //    new Post
+            //    {
+            //        Content = "Jeg sælger min Cykel. PM mig, hvis nogen er intereseret",
+            //        Author = _users[2],
+            //        PublicPost = true,
+            //        Published = DateTime.Now,
+            //        Circles = _circles,
+            //        Comments = new List<Comment>
+            //        {
+            //            _comments[1]
+            //        }
+            //    }
+            //};
+
+            //foreach (var x in _posts)
+            //{
+            //    _postService.Create(x);
+            //}
+        }
+
+
+
         public void Comments()
         {
             _comments = new List<Comment>
@@ -205,87 +306,7 @@ namespace TheSocialNetwork.Data
             post.Comments.Add(_comments[1]);
 
         }
-        public void Posts()
-        {
-            _posts = new List<Post>
-            {
-                //Public posts: 
-                new Post
-                {
-                    Author = _users[1],
-                    Content = "Fuck hvor fedt at få 12 i Engelsk A niveau :D!!!!!!",
-                    PublicPost = true,
-                    Published = DateTime.Now
-
-                },
-
-                //Clicle posts:
-                new Post
-                {
-                    Author = _users[3],
-                    Content = "Hvordan steger man et kyliingebryst bedst?",
-                    PublicPost = false,
-                    Published = DateTime.Now,
-                    Circles = new List<Circle> {_circles[0] },
-                    Comments = new List<Comment>
-                    {
-                        new Comment
-                        {
-                            Content = "Ej det kan du ikke skrive her",
-                            Author = _users[0],
-                            Created = DateTime.Now
-                        },
-                        new Comment
-                        {
-                            Content = "7 min på hver side på stegepanden",
-                            Author = _users[2],
-                            Created = DateTime.Now
-                        },
-                        new Comment
-                        {
-                            Content = "Ikk spis kylling! #VeganLife!",
-                            Author = _users[1],
-                            Created = DateTime.Now
-                        },
-                    }
-                },
-
-                //Clicle posts:
-                new Post
-                {
-                    Content = "Syntes i også at semester 4 er svært?",
-                    Author = _users[0],
-                    PublicPost = false,
-                    Published = DateTime.Now,
-                    Circles = new List<Circle>
-                    {
-                        _circles[1]
-                    },
-                    Comments = new List<Comment>
-                    {
-                        _comments[0]
-                    }        
-                    
-                },
-                new Post
-                {
-                    Content = "Jeg sælger min Cykel. PM mig, hvis nogen er intereseret",
-                    Author = _users[2],
-                    PublicPost = true,
-                    Published = DateTime.Now,
-                    Circles = _circles,
-                    Comments = new List<Comment>
-                    {
-                        _comments[1]
-                    }
-                }
-            };
-
-            foreach (var x in _posts)
-            {
-                _postService.Create(x);
-            }
-        }
+        
 
        
     }
