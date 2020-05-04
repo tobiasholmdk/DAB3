@@ -32,11 +32,12 @@ namespace TheSocialNetwork.Data
             _userService.RemoveAll();
 
             Users();
+            UsersFollowerAndBlocked();
 
             //Posts();
             //Circles();
             //Comments();
-            UsersFollowerAndBlocked();
+
         }
 
         public void Users()
@@ -61,15 +62,6 @@ namespace TheSocialNetwork.Data
                     Circles = new List<Circle>(),
                     BlockedUsers = new List<User>(),
                     FollowedUsers = new List<User>()
-                    //BlockedUsers = new List<User>
-                    //{
-                    //    _users[3]
-                    //},
-                    //FollowedUsers = new List<User>
-                    //{
-                    //    _users[0],
-                    //    _users[2]
-                    //}
                 },
                 new User
                 {
@@ -79,13 +71,6 @@ namespace TheSocialNetwork.Data
                     Circles = new List<Circle>(),
                     BlockedUsers = new List<User>(),
                     FollowedUsers = new List<User>()
-
-                    //FollowedUsers = new List<User>
-                    //{
-                    //    _users[0],
-                    //    _users[1],
-                    //    _users[3]
-                    //}
                 },
                 new User
                 {
@@ -95,16 +80,6 @@ namespace TheSocialNetwork.Data
                     Circles = new List<Circle>(),
                     BlockedUsers = new List<User>(),
                     FollowedUsers = new List<User>()
-                    
-                    //BlockedUsers = new List<User>
-                    //{
-                    //    _users[0],
-                    //    _users[1]
-                    //},
-                    //FollowedUsers = new List<User>
-                    //{
-                    //    _users[2]
-                    //}
                 }
             };
             foreach (var x in _users)
@@ -152,7 +127,6 @@ namespace TheSocialNetwork.Data
                 _users[1]
             };
             _userService.Update("Klara", tempKlara);
-
         }
 
 
