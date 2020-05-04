@@ -11,6 +11,7 @@ namespace TheSocialNetwork.Data
     class DummyData
     {
         private readonly UserService _userService;
+        private readonly PostService _postService;
         private readonly Creations _creations;
 
 
@@ -22,10 +23,8 @@ namespace TheSocialNetwork.Data
         public DummyData()
         {
             _userService = new UserService();
-
-            _creations = new Creations();
-
-
+            _postService = new PostService();
+                                          
             Users();
             Circles();
         }
@@ -157,7 +156,12 @@ namespace TheSocialNetwork.Data
                     }
                 }
             };
-    }
+
+            foreach (var x in _posts)
+            {
+                _postService.Create(x);
+            }
+        }
 
         public void Users()
         {
