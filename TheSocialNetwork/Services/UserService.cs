@@ -42,7 +42,7 @@ namespace TheSocialNetwork.Services
             var circleList = new List<Circle>();
             foreach (var u in users)
             {
-                var hasUser = u.Circles.Find(x => x.MemberNames.Contains(user.Name));
+                var hasUser = u.Circles.Find(x => x.Members.Contains(user));
                 if (hasUser != null)
                 {
                     circleList.Add(hasUser);
@@ -77,7 +77,7 @@ namespace TheSocialNetwork.Services
             bool IsBlocked = false;
             foreach(var x in user_id.BlockedUsers)
             {
-                if(user_guest.Name == x)
+                if(user_guest == x)
                 {
                     IsBlocked = true;
                 }                

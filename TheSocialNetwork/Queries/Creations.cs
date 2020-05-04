@@ -23,17 +23,17 @@ namespace TheSocialNetwork.Queries
                 Age = age,
                 Gender = gender,
                 Circles = new List<Circle>(),
-                BlockedUsers = new List<string>()
+                BlockedUsers = new List<User>()
             };
 
             _userService.Create(newUser);
         }
 
-        public void CreatePost(User author, string postType, string content, bool publicPost, List<Circle> circles)
+        public void CreatePostCircle(User author, string postType, string content, bool publicPost, List<Circle> circles)
         {
             var newPost = new Post
             {
-                Author = author.Name,
+                Author = author,
                 Content = content,
                 Published = DateTime.Now,
                 PublicPost = publicPost,
@@ -41,6 +41,19 @@ namespace TheSocialNetwork.Queries
                 Comments = new List<Comment>()
             };
 
+            _postService.Create(newPost);
+        }
+
+        public void CreatePostPublic(User author, string postType, string content, bool publicPost)
+        {
+            var newPost = new Post
+            {
+                Author = author,
+                Content = content,
+                Published = DateTime.Now,
+                PublicPost = publicPost,                
+                Comments = new List<Comment>()
+            };
             _postService.Create(newPost);
         }
 
@@ -62,7 +75,7 @@ namespace TheSocialNetwork.Queries
             var newCircle = new Circle
             {
                 CircleName = name,
-                MemberNames = new List<string>()
+                Members = new List<User>()
             };
             
             users.Circles.Add(newCircle);

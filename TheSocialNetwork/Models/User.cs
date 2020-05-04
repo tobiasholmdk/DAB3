@@ -20,6 +20,6 @@ namespace TheSocialNetwork.Models
         [BsonElement("Followed Users")]
         public List<User> FollowedUsers { get; set; }
         [BsonElement("Users blocked users")]
-        public List<string> BlockedUsers { get; set; }
+        public List<User> BlockedUsers { get; set; }
     }
 }

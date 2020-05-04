@@ -23,12 +23,12 @@ namespace TheSocialNetwork.Services
 
         public List<Post> GetByAuthor(User user)
         {
-            return _posts.Find(p => p.Author == user.Name).ToList();
+            return _posts.Find(p => p.Author == user).ToList();
         }
 
         public List<Post> GetPostByUser(User user)
         {
-            return _posts.Find(p => p.Author == user.Name).ToList();
+            return _posts.Find(p => p.Author == user).ToList();
         }
 
         public List<Post> GetPostsFromCircle(Circle circle)
@@ -52,7 +52,7 @@ namespace TheSocialNetwork.Services
             List<Post> posts = new List<Post>();
             foreach (var x in user.FollowedUsers)
             {
-                posts = _posts.Find(p => p.Author == x.Name).ToList();
+                posts = _posts.Find(p => p.Author == x).ToList();
             }
             return posts;
         }

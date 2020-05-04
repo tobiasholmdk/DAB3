@@ -7,7 +7,7 @@ using TheSocialNetwork.Services;
 
 namespace TheSocialNetwork.Queries
 {
-    class Views
+    class FeedView
     {
         private readonly PostService _postService;
         private readonly UserService _userService;
@@ -23,7 +23,7 @@ namespace TheSocialNetwork.Queries
         public void ShowPostsInCircle(User user, Circle circle)
         {
             var _circle = _userService.GetCircleByCircleName(user, circle.CircleName);
-            foreach (var x in _circle.MemberNames)
+            foreach (var x in _circle.Members)
             {
                 var post = _postService.Get().Where(y => y.Author == x);
                 
