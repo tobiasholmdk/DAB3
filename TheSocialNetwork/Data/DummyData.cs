@@ -184,10 +184,19 @@ namespace TheSocialNetwork.Data
             {
                 new Post
                 {
-                    Author = new User(),
-                    Content = "Fuck hvor fedt at få 10 i Matematik C :D!!!!!!",
+                    Author = _users[1],
+                    Content = "Fuck hvor fedt at få 7 i Matematik C :D!!!!!!",
                     PublicPost = true,
-                    Published = DateTime.Now
+                    Published = DateTime.Now,
+                    Comments = new List<Comment>
+                    {
+                        new Comment()
+                        {
+                            Author = _userService.GetUserByName("Frederik"), //Alternativt _users[2]
+                            Content = "Ej hvor flot!!! Det har du virkeligt også arbejdet hårdt for <333",
+                            Created = DateTime.Now
+                        }                        
+                    }
                 }
             };
 

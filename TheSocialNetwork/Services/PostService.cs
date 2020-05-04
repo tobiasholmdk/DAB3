@@ -24,6 +24,27 @@ namespace TheSocialNetwork.Services
         {
             return _posts.Find(p => p == post).FirstOrDefault();
         }
+
+        public List<Comment> GetCommentsByPost(Post post)
+        {
+            List<Comment> postComments = new List<Comment>();
+            foreach(var pc in post.Comments)
+            {
+                postComments.Add(pc);
+            }
+            return postComments;
+        }
+
+        //public void Update(Post name, Post user)
+        //{
+        //    _posts.ReplaceOne(u => user == name, user);
+        //}
+
+
+
+
+
+
         public List<Post> GetByAuthor(User user)
         {
             return _posts.Find(p => p.Author == user).ToList();

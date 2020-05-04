@@ -59,8 +59,19 @@ namespace TheSocialNetwork
             Console.WriteLine("");
             foreach(var p in _posts)
             {
-                Console.WriteLine(p.Author + " writes:");
-                Console.WriteLine(p.Content + " - Date: " + p.Published);                
+                Console.WriteLine(p.Author.Name + " writes:");
+                Console.WriteLine(p.Content + " - Date: " + p.Published);
+
+                Console.WriteLine("");
+
+                Console.WriteLine("--Comments--");
+                List<Comment> comments = _postService.GetCommentsByPost(p);
+                foreach(var c in comments)
+                {
+                    Console.WriteLine("  * " + c.Author.Name + " has commented:");
+                    Console.WriteLine("      - " + c.Content + " - Date: " + c.Created);
+                }
+
             }
 
 
