@@ -266,6 +266,15 @@ namespace TheSocialNetwork.Data
                             Author = _users[0]
                         }
                     }
+                },
+                new Post
+                {
+                    Content = "Jeg håber ikke at der er nogen som finder ud af at jeg er en fury",
+                    Author = _users[1],
+                    PublicPost = false,
+                    Published = DateTime.Now,
+                    Circles = new List<Circle>(),
+                    Comments = new List<Comment>()
                 }
             };
             foreach (var x in _posts)

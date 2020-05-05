@@ -123,9 +123,7 @@ namespace TheSocialNetwork.Queries
 
                     Console.WriteLine("---------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("");                    
-                }
-
-                //ShowPostsInCircle(user, c);
+                }                
             }
 
 

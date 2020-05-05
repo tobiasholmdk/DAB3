@@ -84,6 +84,7 @@ namespace TheSocialNetwork
 
 
                 FeedView myFeedView = new FeedView();
+                WallView myWallView = new WallView();
 
                 switch (menuNavigation)
                 {
@@ -92,7 +93,20 @@ namespace TheSocialNetwork
                         myFeedView.UserFeed(loggedInUser);
                         break;
                     case "2":
-                        Console.WriteLine("user-wall - Page");
+                        Console.Write("Show wall for: ");
+
+                        string showUserName = Console.ReadLine();
+                        var showUser = _userService.GetUserByName(showUserName);
+
+                        if (showUser == null)
+                        {
+                            Console.WriteLine("No existing users goes by that name.");
+                        }
+                        else
+                        {
+                            myWallView.wall(showUser, loggedInUser);
+                        }                     
+
                         break;
                     case "3":
                         Console.WriteLine("Make post - Page");
@@ -102,6 +116,8 @@ namespace TheSocialNetwork
                         break;
                 }
             }
+
+            
 
 
 
@@ -194,6 +210,10 @@ namespace TheSocialNetwork
 
 
 
+        }
+        public void showUserWall()
+        {
+            
         }
     }
 }

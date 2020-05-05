@@ -77,7 +77,7 @@ namespace TheSocialNetwork.Services
             bool IsBlocked = false;
             foreach(var x in user_id.BlockedUsers)
             {
-                if(user_guest == x)
+                if(user_guest.Name == x.Name)
                 {
                     IsBlocked = true;
                 }                
