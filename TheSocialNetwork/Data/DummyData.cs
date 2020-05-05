@@ -298,7 +298,7 @@ namespace TheSocialNetwork.Data
             };
             var tempPost = _posts[2];
             tempPost.Comments.Add(_comments[0]);
-            _postService.Update(tempPost, _posts[0]);
+            //_postService.Update(tempPost, _posts[0]);
         }       
     }
 }
