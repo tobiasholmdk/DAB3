@@ -47,7 +47,7 @@ namespace TheSocialNetwork.Services
 
         public List<Post> GetByAuthor(User user)
         {
-            return _posts.Find(p => p.Author == user).ToList();
+            return _posts.Find(p => p.Author.Name == user.Name).ToList();
         }
 
         public List<Post> GetPostByUser(User user)

@@ -42,15 +42,11 @@ namespace TheSocialNetwork.Services
 
         public List<Circle> GetCirclesByUser(User user)
         {
-            var users = Get();
+           
             var circleList = new List<Circle>();
-            foreach (var u in users)
+            foreach (var c in user.Circles)
             {
-                var hasUser = u.Circles.Find(x => x.Members.Contains(user));
-                if (hasUser != null)
-                {
-                    circleList.Add(hasUser);
-                }
+                circleList.Add(c);
             }
 
             return circleList;
