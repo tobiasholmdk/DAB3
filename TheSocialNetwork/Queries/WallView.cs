@@ -35,7 +35,7 @@ namespace TheSocialNetwork.Queries
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("                                 " + user_id.Name + "'s Public Posts");
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
-                Console.WriteLine("");
+                
                 
                 var followedUserWall = _postService.GetByAuthor(user_id);
 
@@ -43,11 +43,11 @@ namespace TheSocialNetwork.Queries
                 {
                     if(x.PublicPost == true)
                     {
-                        Console.WriteLine("");
+                        
                         Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
                         Console.WriteLine(x.Author.Name + " writes:");
-                        Console.WriteLine(x.Content + " - Date: " + x.Published);
+                        Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id);
 
                         Console.WriteLine("");
 
@@ -79,7 +79,7 @@ namespace TheSocialNetwork.Queries
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("                                 " + user_id.Name + "'s posts in circles you are a member of");
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
-                Console.WriteLine("");
+                
 
                 var userCircleList = _userService.GetCirclesByUser(user_id);
                 var guestCircleList = _userService.GetCirclesByUser(guest_id);
@@ -104,12 +104,11 @@ namespace TheSocialNetwork.Queries
                     if (x.Author.Name == user_id.Name)
                     {
                         if (x.PublicPost == true)
-                        {
-                            Console.WriteLine("");
+                        {                           
                             Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
                             Console.WriteLine(x.Author.Name + " writes:");
-                            Console.WriteLine(x.Content + " - Date: " + x.Published);
+                            Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id);
 
                             Console.WriteLine("");
 
@@ -124,7 +123,17 @@ namespace TheSocialNetwork.Queries
 
                             Console.WriteLine("---------------------------------------------------------------------------------------------------------");
                             Console.WriteLine("");
-                        }                        
+                        }
+                        else
+                        {                            
+                            Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+
+                            Console.WriteLine("This post is private");
+
+                            Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+                            Console.WriteLine("");
+                        }
+
                     }                    
                 }
             }

@@ -25,6 +25,11 @@ namespace TheSocialNetwork.Services
             return _posts.Find(p => p == post).FirstOrDefault();
         }
 
+        public Post GetPostById(string id)
+        {
+            return _posts.Find(post => post.Id == id).FirstOrDefault();
+        }
+
         public List<Comment> GetCommentsByPost(Post post)
         {
             List<Comment> postComments = new List<Comment>();

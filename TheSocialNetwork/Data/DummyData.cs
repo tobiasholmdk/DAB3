@@ -13,9 +13,9 @@ namespace TheSocialNetwork.Data
     {
         private readonly UserService _userService;
         private readonly PostService _postService;
+
         private List<User> _users;
         private List<Post> _posts;
-
         private List<Circle> _circles;
         private List<Comment> _comments;
 
@@ -268,7 +268,7 @@ namespace TheSocialNetwork.Data
                 new Post
                 {
                     Content = "Jeg håber ikke at der er nogen som finder ud af at jeg er en fury",
-                    Author = _users[1],
+                    Author = _users[0],
                     PublicPost = false,
                     Published = DateTime.Now,
                     Circles = new List<Circle>(),
@@ -278,8 +278,7 @@ namespace TheSocialNetwork.Data
             foreach (var x in _posts)
             {
                 _postService.Create(x);
-            }         
-
+            } 
         }
 
         public void Comments()
@@ -292,10 +291,8 @@ namespace TheSocialNetwork.Data
                     Created = DateTime.Now,
                     Author = _users[1]                    
                 }              
-            };
-
-            _posts[2].Comments.Add(_comments[0]);
-            Console.WriteLine(_posts[2].Id);
+            };            
+            _posts[2].Comments.Add(_comments[0]);            
             _postService.Update(_posts[2].Id, _posts[2]);
 
         }

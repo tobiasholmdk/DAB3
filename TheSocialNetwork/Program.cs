@@ -67,26 +67,23 @@ namespace TheSocialNetwork
 
                 while(true)
                 {
-                    
-
                     Console.WriteLine("Menu - Page");
                     Console.WriteLine("");
 
-                    Console.WriteLine("   - Show user-feed (1)");
-                    Console.WriteLine("   - Show user-wall (2)");
-                    Console.WriteLine("   - Make post      (3)");
-                    Console.WriteLine("   - Make Comment   (4)");
+                    Console.WriteLine("   - Show user-feed   (1)");
+                    Console.WriteLine("   - Show user-wall   (2)");
+                    Console.WriteLine("   - Make post        (3)");
+                    Console.WriteLine("   - Make Comment     (4)");
+                    Console.WriteLine("   - Delete all posts (5)");
                     Console.WriteLine("");
 
-                    Console.Write("Please 1, 2 or 3 to make use of TheSocialNetworks functionallities: ");
+                    Console.Write("Please 1, 2, 3, 4 or 5 to make use of TheSocialNetworks functionallities: ");
                     string menuNavigation = Console.ReadLine();
                     
 
                     Console.WriteLine("");
                     Console.WriteLine("---------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("");
-
-
 
                     FeedView myFeedView = new FeedView();
                     WallView myWallView = new WallView();
@@ -130,19 +127,46 @@ namespace TheSocialNetwork
                                 Circles = new List<Circle>(),
                                 Comments = new List<Comment>()
                             };
-
                             _postService.Create(post);
 
+                            break;
+                        case "4":
+                            Console.Clear();
+
+                            Console.Write("Write the id of the post you would like to comment: ");
+                            string id = Console.ReadLine();
+
+                            Console.Write("Content of comment: ");
+                            string myCommentContent = Console.ReadLine();
+
+                            Comment comment = new Comment
+                            {
+                                Author = loggedInUser,
+                                Content = myCommentContent,
+                                Created = DateTime.Now
+                            };
+
+                            Post tempPost = _postService.GetPostById(id);
+                            tempPost.Comments.Add(comment);
+                            _postService.Update(tempPost.Id, tempPost);
 
                             break;
+                        case "5":
+                            Console.Clear();
+                            Console.WriteLine("Are you sure you want to delete all posts? If so, press y");
+                            string awnser = Console.ReadLine();
+                            if(awnser == "y")
+                            {
+                                _postService.RemoveAll();
+                                Console.WriteLine("All posts have been removed");
+                            }                            
+                            break;
+
                         default:
-                            Console.Write("Please 1, 2 or 3 to make use of TheSocialNetworks functionallities: ");
+                            Console.Write("Please 1, 2, 3, 4 or 5 to make use of TheSocialNetworks functionallities: ");
                             break;
-                    }
-
-                    
-                }
-                
+                    }                    
+                }                
             }
 
             

@@ -27,7 +27,7 @@ namespace TheSocialNetwork.Queries
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
                 Console.WriteLine(x.Author.Name + " writes:");
-                Console.WriteLine(x.Content + " - Date: " + x.Published);
+                Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id);
 
                 Console.WriteLine("");
 
@@ -45,7 +45,6 @@ namespace TheSocialNetwork.Queries
 
         public void ShowOwnPost(User user)
         {
-
             var _ownposts = _postService.GetByAuthor(user);
 
             Console.WriteLine("Your posts");
@@ -55,7 +54,7 @@ namespace TheSocialNetwork.Queries
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
                 Console.WriteLine(x.Author.Name + " writes:");
-                Console.WriteLine(x.Content + " - Date: " + x.Published);
+                Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id);
 
                 Console.WriteLine("");
 
@@ -75,25 +74,24 @@ namespace TheSocialNetwork.Queries
             
         }
 
-        public void ShowPostsInCircle(User user, Circle circle)
-        {
-            var _circle = _userService.GetCircleByCircleName(user, circle.CircleName);
-            foreach (var x in _circle.Members)
-            {
-                var post = _postService.Get().Where(y => y.Author.Name == x.Name);
+        //public void ShowPostsInCircle(User user, Circle circle)
+        //{
+        //    var _circle = _userService.GetCircleByCircleName(user, circle.CircleName);
+        //    foreach (var x in _circle.Members)
+        //    {
+        //        var post = _postService.Get().Where(y => y.Author.Name == x.Name);
                 
-                foreach (var z in post)
-                {
-                    Console.WriteLine("User " + z.Author + " Posted " + z.Content + " Time Posted: " + z.Published);
-                }
-            }
-        }
+        //        foreach (var z in post)
+        //        {
+        //            Console.WriteLine("User " + z.Author + " Posted " + z.Content + " Time Posted: " + z.Published);
+        //        }
+        //    }
+        //}
 
         public void ShowPostsInAllCircles(User user)
         {
             List<Circle> userCircles = _userService.GetCirclesByUser(user);
-            List<Post> postInCircles; 
-
+            List<Post> postInCircles;
 
             foreach (var c in userCircles)
             {                
@@ -103,25 +101,27 @@ namespace TheSocialNetwork.Queries
 
                 foreach (var x in postInCircles)
                 {
-                    Console.WriteLine("");
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------");
-
-                    Console.WriteLine(x.Author.Name + " writes:");
-                    Console.WriteLine(x.Content + " - Date: " + x.Published);
-
-                    Console.WriteLine("");
-
-                    Console.WriteLine("--Comments--");
-                    List<Comment> comments = _postService.GetCommentsByPost(x);
-
-                    foreach (var co in comments)
                     {
-                        Console.WriteLine("  * " + co.Author.Name + " has commented:");
-                        Console.WriteLine("      - " + co.Content + " - Date: " + co.Created);
-                    }
+                        Console.WriteLine("");
+                        Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("");                    
+                        Console.WriteLine(x.Author.Name + " writes:");
+                        Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id);
+
+                        Console.WriteLine("");
+
+                        Console.WriteLine("--Comments--");
+                        List<Comment> comments = _postService.GetCommentsByPost(x);
+
+                        foreach (var co in comments)
+                        {
+                            Console.WriteLine("  * " + co.Author.Name + " has commented:");
+                            Console.WriteLine("      - " + co.Content + " - Date: " + co.Created);
+                        }
+
+                        Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+                        Console.WriteLine("");
+                    }                  
                 }                
             }
 
@@ -180,7 +180,6 @@ namespace TheSocialNetwork.Queries
 
             Console.WriteLine("***Followed users posts***");
             ShowFollowedUserPost(user);
-
             
 
             Console.WriteLine("***Your circles posts***");
