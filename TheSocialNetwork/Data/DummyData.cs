@@ -296,9 +296,11 @@ namespace TheSocialNetwork.Data
                     Author = _users[1]                    
                 }              
             };
-            var tempPost = _posts[2];
+
+            var tempPost = _postService.Get(_posts[2]);
             tempPost.Comments.Add(_comments[0]);
-            //_postService.Update(tempPost, _posts[0]);
-        }       
+            _postService.Update(tempPost, _posts[2]);
+                   
+        }
     }
 }

@@ -80,6 +80,7 @@ namespace TheSocialNetwork.Queries
             
             users.Circles.Add(newCircle);
             _userService.Update(users.Name, users);
+            Console.Clear();
         }
 
     }
