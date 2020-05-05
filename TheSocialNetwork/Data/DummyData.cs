@@ -248,7 +248,6 @@ namespace TheSocialNetwork.Data
                             Author = _userService.GetUserByName("Frederik")
                         }
                     }
-
                 },
                 new Post
                 {
@@ -280,8 +279,7 @@ namespace TheSocialNetwork.Data
             foreach (var x in _posts)
             {
                 _postService.Create(x);
-            }   
-            
+            }         
 
         }
 

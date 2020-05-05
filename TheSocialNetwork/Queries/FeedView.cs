@@ -38,7 +38,6 @@ namespace TheSocialNetwork.Queries
                     Console.WriteLine("  * " + c.Author.Name + " has commented:");
                     Console.WriteLine("      - " + c.Content + " - Date: " + c.Created);
                 }
-
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------");
                 Console.WriteLine("");                
             }

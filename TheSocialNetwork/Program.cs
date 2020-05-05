@@ -65,56 +65,84 @@ namespace TheSocialNetwork
 
                 Console.WriteLine("");
 
-
-                Console.WriteLine("Menu - Page");
-                Console.WriteLine("");
-
-                Console.WriteLine("   - Show user-feed (1)");
-                Console.WriteLine("   - Show user-wall (2)");
-                Console.WriteLine("   - Make post      (3)");
-                Console.WriteLine("");
-
-                Console.Write("Please 1, 2 or 3 to make use of TheSocialNetworks functionallities: ");
-                string menuNavigation = Console.ReadLine();
-
-                Console.WriteLine("");
-                Console.WriteLine("---------------------------------------------------------------------------------------------------------");
-                Console.WriteLine("");
-
-
-
-                FeedView myFeedView = new FeedView();
-                WallView myWallView = new WallView();
-
-                switch (menuNavigation)
+                while(true)
                 {
-                    case "1":
-                        Console.WriteLine("user-feed - Page");
-                        myFeedView.UserFeed(loggedInUser);
-                        break;
-                    case "2":
-                        Console.Write("Show wall for: ");
+                    
 
-                        string showUserName = Console.ReadLine();
-                        var showUser = _userService.GetUserByName(showUserName);
+                    Console.WriteLine("Menu - Page");
+                    Console.WriteLine("");
 
-                        if (showUser == null)
-                        {
-                            Console.WriteLine("No existing users goes by that name.");
-                        }
-                        else
-                        {
-                            myWallView.wall(showUser, loggedInUser);
-                        }                     
+                    Console.WriteLine("   - Show user-feed (1)");
+                    Console.WriteLine("   - Show user-wall (2)");
+                    Console.WriteLine("   - Make post      (3)");
+                    Console.WriteLine("   - Make Comment   (4)");
+                    Console.WriteLine("");
 
-                        break;
-                    case "3":
-                        Console.WriteLine("Make post - Page");
-                        break;
-                    default:
-                        Console.Write("Please 1, 2 or 3 to make use of TheSocialNetworks functionallities: ");
-                        break;
+                    Console.Write("Please 1, 2 or 3 to make use of TheSocialNetworks functionallities: ");
+                    string menuNavigation = Console.ReadLine();
+                    
+
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("");
+
+
+
+                    FeedView myFeedView = new FeedView();
+                    WallView myWallView = new WallView();
+
+                    switch (menuNavigation)
+                    {
+                        case "1":
+                            Console.Clear();
+                            Console.WriteLine("user-feed - Page");
+                            myFeedView.UserFeed(loggedInUser);
+                            break;
+                        case "2":
+                            Console.Clear();
+                            Console.Write("Show wall for: ");
+
+                            string showUserName = Console.ReadLine();
+                            var showUser = _userService.GetUserByName(showUserName);
+
+                            if (showUser == null)
+                            {
+                                Console.WriteLine("No existing users goes by that name.");
+                            }
+                            else
+                            {
+                                myWallView.wall(showUser, loggedInUser);
+                            }
+
+                            break;
+                        case "3":
+                            Console.Clear();
+                            Console.WriteLine("Make post - Page");
+
+                            Console.Write("Content of post: ");
+                            string myContent = Console.ReadLine();
+                            Post post = new Post
+                            {
+                                Author = loggedInUser,
+                                Content = myContent,
+                                PublicPost = true,
+                                Published = DateTime.Now,
+                                Circles = new List<Circle>(),
+                                Comments = new List<Comment>()
+                            };
+
+                            _postService.Create(post);
+
+
+                            break;
+                        default:
+                            Console.Write("Please 1, 2 or 3 to make use of TheSocialNetworks functionallities: ");
+                            break;
+                    }
+
+                    
                 }
+                
             }
 
             
