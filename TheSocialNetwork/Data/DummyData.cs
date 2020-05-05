@@ -35,8 +35,7 @@ namespace TheSocialNetwork.Data
             UsersFollowerAndBlocked();
             Circles();
             Posts();
-
-            //Comments();
+            Comments();
 
         }
 
@@ -283,8 +282,6 @@ namespace TheSocialNetwork.Data
 
         }
 
-
-
         public void Comments()
         {
             _comments = new List<Comment>
@@ -297,10 +294,10 @@ namespace TheSocialNetwork.Data
                 }              
             };
 
-            var tempPost = _postService.Get(_posts[2]);
-            tempPost.Comments.Add(_comments[0]);
-            _postService.Update(tempPost, _posts[2]);
-                   
+            _posts[2].Comments.Add(_comments[0]);
+            Console.WriteLine(_posts[2].Id);
+            _postService.Update(_posts[2].Id, _posts[2]);
+
         }
     }
 }

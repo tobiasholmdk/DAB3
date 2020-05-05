@@ -10,7 +10,7 @@ namespace TheSocialNetwork.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("Post Author")]
         public User Author { get; set; }

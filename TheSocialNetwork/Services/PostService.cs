@@ -35,10 +35,14 @@ namespace TheSocialNetwork.Services
             return postComments;
         }
 
-        public void Update(Post name, Post user)
+        public void Update(string id, Post postIn)
         {
-            _posts.ReplaceOne(u => user == name, user);
+            _posts.ReplaceOne(post => post.Id == id, postIn);
         }
+
+
+
+
 
 
 
