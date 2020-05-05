@@ -12,6 +12,12 @@ namespace TheSocialNetwork.Queries
         private readonly PostService _postService;
         private readonly UserService _userService;
 
+        public FeedView()
+        {
+            _postService = new PostService();
+            _userService = new UserService();
+        }
+
         public void ShowFollowedUserPost(User user)
         {
             var posts = _postService.GetByFollowedUsers(user);
@@ -35,15 +41,15 @@ namespace TheSocialNetwork.Queries
         }
 
         public void UserFeed(User user)
-        {
-            //var _followedPosts = _postService.GetByFollowedUsers(user);
+        {            
+            ////var _followedPosts = _postService.GetByFollowedUsers(user);
             var _ownposts = _postService.GetByAuthor(user);
             var _userCircles = _userService.GetCirclesByUser(user);
 
             Console.WriteLine("Your posts");
             foreach (var x in _ownposts)
             {
-                Console.WriteLine( "Post " + x.Content + " Time Posted: " + x.Published);
+                Console.WriteLine("Post " + x.Content + " Time Posted: " + x.Published);
             }
 
             Console.WriteLine("-----------------------------------------------------------");
@@ -54,10 +60,10 @@ namespace TheSocialNetwork.Queries
                 var circlepost = _postService.GetPostsFromCircle(x);
                 foreach (var y in circlepost)
                 {
-                    Console.WriteLine("User " + y.Author + " Posted " + y.Content + " Time Posted: " + y.Published);
+                    Console.WriteLine("User " + y.Author.Name + " Posted " + y.Content + " Time Posted: " + y.Published);
                 }
             }
-            
+
             Console.WriteLine("-----------------------------------------------------------");
 
             ShowFollowedUserPost(user);

@@ -34,7 +34,6 @@ namespace TheSocialNetwork.Data
             Users();
             UsersFollowerAndBlocked();
             Circles();
-
             Posts();
 
             //Comments();
@@ -195,96 +194,86 @@ namespace TheSocialNetwork.Data
                             Author = _userService.GetUserByName("Frederik"), //Alternativt _users[2]
                             Content = "Ej hvor flot!!! Det har du virkeligt også arbejdet hårdt for <333",
                             Created = DateTime.Now
-                        }                        
+                        },
+                        new Comment()
+                        {
+                            Author = _userService.GetUserByName("Morten"), //Alternativt _users[0]
+                            Content = "Tillykke!",
+                            Created = DateTime.Now
+                        },
+                    }
+                },
+                new Post
+                {
+                    Author = _users[3],
+                    Content = "Hvordan steger man et kyliingebryst bedst?",
+                    PublicPost = false,
+                    Published = DateTime.Now,
+                    Circles = new List<Circle> {_circles[0]},
+                    Comments = new List<Comment>
+                    {
+                        new Comment
+                        {
+                            Content = "Ej det kan du ikke skrive her?!",
+                            Author = _users[0],
+                            Created = DateTime.Now
+                        },
+                        new Comment
+                        {
+                            Content = "7 min ved mellem varme på hver side.",
+                            Author = _users[2],
+                            Created = DateTime.Now
+                        },
+                        new Comment
+                        {
+                            Content = "Ikk spis kylling! #VeganLife!",
+                            Author = _users[1],
+                            Created = DateTime.Now
+                        },
+                    }
+                },
+                new Post
+                {
+                    Content = "Syntes i også at semester 4 er svært?",
+                    Author = _users[0],
+                    PublicPost = false,
+                    Published = DateTime.Now,
+                    Circles = new List<Circle> { _circles[1] },
+                    Comments = new List<Comment>
+                    {
+                        new Comment
+                        {
+                            Content = "Nej.",
+                            Created = DateTime.Now,
+                            Author = _userService.GetUserByName("Frederik")
+                        }
+                    }
+
+                },
+                new Post
+                {
+                    Content = "Jeg sælger min Cykel. PM mig, hvis nogen er intereseret",
+                    Author = _users[2],
+                    PublicPost = true,
+                    Published = DateTime.Now,
+                    Circles = _circles,
+                    Comments = new List<Comment>
+                    {
+                        new Comment
+                        {
+                            Content = "Der er ikke nogen PM funktionalitet på dette system?",
+                            Created = DateTime.Now,
+                            Author = _users[0]
+                        }
                     }
                 }
             };
-
             foreach (var x in _posts)
             {
                 _postService.Create(x);
-            }
-
+            }   
             
 
-
-            //_posts = new List<Post>
-            //{
-            //    //Public posts: 
-            //    new Post
-            //    {
-            //        Author = _users[1],
-            //        Content = "Fuck hvor fedt at få 12 i Engelsk A niveau :D!!!!!!",
-            //        PublicPost = true,
-            //        Published = DateTime.Now
-            //    },
-
-            //    //Clicle posts:
-            //    new Post
-            //    {
-            //        Author = _users[3],
-            //        Content = "Hvordan steger man et kyliingebryst bedst?",
-            //        PublicPost = false,
-            //        Published = DateTime.Now,
-            //        Circles = new List<Circle> {_circles[0] },
-            //        Comments = new List<Comment>
-            //        {
-            //            new Comment
-            //            {
-            //                Content = "Ej det kan du ikke skrive her",
-            //                Author = _users[0],
-            //                Created = DateTime.Now
-            //            },
-            //            new Comment
-            //            {
-            //                Content = "7 min på hver side på stegepanden",
-            //                Author = _users[2],
-            //                Created = DateTime.Now
-            //            },
-            //            new Comment
-            //            {
-            //                Content = "Ikk spis kylling! #VeganLife!",
-            //                Author = _users[1],
-            //                Created = DateTime.Now
-            //            },
-            //        }
-            //    },
-
-            //    //Clicle posts:
-            //    new Post
-            //    {
-            //        Content = "Syntes i også at semester 4 er svært?",
-            //        Author = _users[0],
-            //        PublicPost = false,
-            //        Published = DateTime.Now,
-            //        Circles = new List<Circle>
-            //        {
-            //            _circles[1]
-            //        },
-            //        Comments = new List<Comment>
-            //        {
-            //            _comments[0]
-            //        }
-
-            //    },
-            //    new Post
-            //    {
-            //        Content = "Jeg sælger min Cykel. PM mig, hvis nogen er intereseret",
-            //        Author = _users[2],
-            //        PublicPost = true,
-            //        Published = DateTime.Now,
-            //        Circles = _circles,
-            //        Comments = new List<Comment>
-            //        {
-            //            _comments[1]
-            //        }
-            //    }
-            //};
-
-            //foreach (var x in _posts)
-            //{
-            //    _postService.Create(x);
-            //}
         }
 
 
@@ -295,28 +284,14 @@ namespace TheSocialNetwork.Data
             {
                 new Comment
                 {
-                    Content = "Nej",
+                    Content = "Måske lidt",
                     Created = DateTime.Now,
-                    Author = _users[2]
-                },
-                new Comment
-                {
-                    Content = "Der er ikke nogen PM funktionalitet på dette system?",
-                    Created = DateTime.Now,
-                    Author = _users[1]
-                }
+                    Author = _users[1]                    
+                }              
             };
-            
-            // Post 2
-            var post = _postService.Get(_posts[2]);
-            post.Comments.Add(_comments[0]);
-            // Post 3
-            post = _postService.Get(_posts[3]);
-            post.Comments.Add(_comments[1]);
-
-        }
-        
-
-       
+            var tempPost = _posts[2];
+            tempPost.Comments.Add(_comments[0]);
+            _postService.Update(tempPost, _posts[0]);
+        }       
     }
 }
