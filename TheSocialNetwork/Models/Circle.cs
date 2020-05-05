@@ -15,10 +15,5 @@ namespace TheSocialNetwork.Models
         public string CircleName { get; set; }
         [BsonElement("Member ID")]
         public List<User> Members { get; set; }
-        
-        /*[BsonElement("Post ID")]
-        public List<int> PostId { get; set; }
-        */
-        
     }
 }

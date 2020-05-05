@@ -45,15 +45,6 @@ namespace TheSocialNetwork.Services
             _posts.ReplaceOne(post => post.Id == id, postIn);
         }
 
-
-
-
-
-
-
-
-
-
         public List<Post> GetByAuthor(User user)
         {
             return _posts.Find(p => p.Author.Name == user.Name).ToList();
@@ -71,7 +62,6 @@ namespace TheSocialNetwork.Services
 
         public List<Post> GetPostsFromAllCircles(List<Circle> circles)
         {
-            //var circles = _userService.GetCirclesByUser(user);
             List<Post> posts = new List<Post>();
             foreach (var x in circles)
             {
