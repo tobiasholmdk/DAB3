@@ -25,20 +25,11 @@ namespace TheSocialNetwork.Services
             return _users.Find(u => true).ToList();
         }
 
-        public User Get(User user)
-        {
-            return _users.Find(u => u == user).FirstOrDefault();
-        }
-
         public User GetUserByName(string name)
         {
             return _users.Find(u => u.Name == name).FirstOrDefault();
         }
-
-        public Circle GetCircleByCircleName(User user, string name)
-        {
-            return user.Circles.Find(x => x.CircleName == name);
-        }
+        
 
         public List<Circle> GetCirclesByUser(User user)
         {
@@ -61,12 +52,6 @@ namespace TheSocialNetwork.Services
         {
             _users.ReplaceOne(u => u.Name == name, user);
         }
-
-        public void RemoveUser(User user)
-        {
-            _users.DeleteOne(u => u.Name == user.Name);
-        }
-
         public void RemoveAll()
         {
             _users.DeleteMany(u => u.Name != null);
