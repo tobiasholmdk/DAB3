@@ -9,7 +9,7 @@ namespace TheSocialNetwork.Services
     public class UserService
     {
         private readonly IMongoCollection<User> _users;
-       // private readonly IMongoCollection<Circle> _circles;
+       
 
         public UserService()
         {
@@ -17,7 +17,7 @@ namespace TheSocialNetwork.Services
             var database = client.GetDatabase("TheSocialNetworkDatabase");
             
             _users = database.GetCollection<User>("Users");
-           // _circles = database.GetCollection<User>("Users");
+          
         }
 
         public List<User> Get()
