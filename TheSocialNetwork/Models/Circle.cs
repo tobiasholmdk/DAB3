@@ -11,9 +11,8 @@ namespace TheSocialNetwork.Models
         public ObjectId Id { get; set; }
 
         [BsonRequired]
-        [BsonElement("Circle Name")]
         public string CircleName { get; set; }
-        [BsonElement("Member ID")]
+
         public List<User> Members { get; set; }
     }
 }

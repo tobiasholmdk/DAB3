@@ -5,11 +5,8 @@ namespace TheSocialNetwork.Models
 {
     public class Comment
     {
-        [BsonElement("Comment Content")]
         public string Content { get; set; }
-        [BsonElement("Time of Comment")]
         public DateTime Created {get; set; }
-        [BsonElement("Comment Author")]
         public User Author {get; set; }
     }
 }
