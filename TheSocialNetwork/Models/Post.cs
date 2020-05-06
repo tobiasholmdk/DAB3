@@ -15,8 +15,6 @@ namespace TheSocialNetwork.Models
         public string Content { get; set; }
         public bool PublicPost { get; set; }
         public DateTime Published {get; set; }
-        [BsonDefaultValue("Text")]
-        public string Type { get; set; }
         public List<Circle> Circles { get; set; }
         public List<Comment> Comments { get; set; }
     }

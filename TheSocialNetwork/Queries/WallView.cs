@@ -47,7 +47,7 @@ namespace TheSocialNetwork.Queries
                         Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
                         Console.WriteLine(x.Author.Name + " writes:");
-                        Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id + " - Post Type: " + x.Type);
+                        Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id);
 
                         Console.WriteLine("");
 
@@ -108,7 +108,7 @@ namespace TheSocialNetwork.Queries
                             Console.WriteLine("---------------------------------------------------------------------------------------------------------");
 
                             Console.WriteLine(x.Author.Name + " writes:");
-                            Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id + " - Post Type: " + x.Type);
+                            Console.WriteLine(x.Content + " - Date: " + x.Published + " - Post Id: " + x.Id);
 
                             Console.WriteLine("");
 
