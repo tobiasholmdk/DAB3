@@ -186,6 +186,7 @@ namespace TheSocialNetwork.Data
                     Content = "Fuck hvor fedt at få 7 i Matematik C :D!!!!!!",
                     PublicPost = true,
                     Published = DateTime.Now,
+                    Type = "Text",
                     Comments = new List<Comment>
                     {
                         new Comment()
@@ -193,6 +194,7 @@ namespace TheSocialNetwork.Data
                             Author = _userService.GetUserByName("Frederik"), //Alternativt _users[2]
                             Content = "Ej hvor flot!!! Det har du virkeligt også arbejdet hårdt for <333",
                             Created = DateTime.Now
+                            
                         },
                         new Comment()
                         {
@@ -208,6 +210,7 @@ namespace TheSocialNetwork.Data
                     Content = "Hvordan steger man et kyliingebryst bedst?",
                     PublicPost = false,
                     Published = DateTime.Now,
+                    Type = "Text",
                     Circles = new List<Circle> {_circles[0]},
                     Comments = new List<Comment>
                     {
@@ -237,6 +240,7 @@ namespace TheSocialNetwork.Data
                     Author = _users[0],
                     PublicPost = false,
                     Published = DateTime.Now,
+                    Type = "Text",
                     Circles = new List<Circle> { _circles[1] },
                     Comments = new List<Comment>
                     {
@@ -253,6 +257,7 @@ namespace TheSocialNetwork.Data
                     Content = "Jeg sælger min Cykel. PM mig, hvis nogen er intereseret",
                     Author = _users[2],
                     PublicPost = true,
+                    Type = "Text",
                     Published = DateTime.Now,
                     Circles = _circles,
                     Comments = new List<Comment>
@@ -270,6 +275,7 @@ namespace TheSocialNetwork.Data
                     Content = "Jeg håber ikke at der er nogen som finder ud af at jeg er en fury",
                     Author = _users[0],
                     PublicPost = false,
+                    Type = "Text",
                     Published = DateTime.Now,
                     Circles = new List<Circle>(),
                     Comments = new List<Comment>()
